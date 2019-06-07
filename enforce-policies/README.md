@@ -1,10 +1,10 @@
-# Enforce policies for microservices
+# Exercise 8 - Enforce policies for microservices
 
 Backend systems such as access control systems, telemetry capturing systems, quota enforcement systems, billing systems, and so forth, traditionally directly integrate with services, creating a hard coupling and baking-in specific semantics and usage options.
 
 Istio Mixer provides a generic intermediation layer between app code and infrastructure backends. Its design moves policy decisions out of the app layer and into configuration instead, under operator control. Instead of having app code integrate with specific backends, the app code instead does a fairly simple integration with Mixer, and Mixer takes responsibility for interfacing with the backend systems.
 
-Given that individual infrastructure backends each have different interfaces and operational models, Mixer needs custom code to deal with each and we call these custom bundles of code **adapters**. Here are some built-in adapters: denier, prometheus,  memquota, and stackdriver.
+Given that individual infrastructure backends each have different interfaces and operational models, Mixer needs custom code to deal with each and we call these custom bundles of code **adapters**. Some built-in adapters include denier, prometheus,  memquota, and stackdriver.
 
 In this exercise we'll use the denier adapter.
 
@@ -52,13 +52,15 @@ In this exercise we'll use the denier adapter.
 
 2. Verify that the service is denied:
 
-   In [this exercise](../create-ingress-gateway/README.md), we created the Ingress Gateway resource. Make sure the $INGRESS_IP environment variable is still present. Then in the terminal, try:
+   In [Exercise 5](../exercise-5/README.md), we created the Ingress resource. Make sure the $INGRESS_IP environment variable is still present. Then in the terminal, try:
 
     ```shell
     curl http://$INGRESS_IP/
     ```
 
     You should see the error message `PERMISSION_DENIED:denyall.denier.istio-system:Not allowed`.
+
+    You can also try visiting the guestbook app in the browser, and you should see the same error message.
 
 3. Clean up the rule.
 
