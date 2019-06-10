@@ -22,7 +22,6 @@ In this exercise we'll use the denier adapter.
         kind: denier
         metadata:
           name: denyall
-          namespace: istio-system
         spec:
           status:
             code: 7
@@ -33,17 +32,15 @@ In this exercise we'll use the denier adapter.
         kind: checknothing
         metadata:
           name: denyrequest
-          namespace: istio-system
         spec:
         ---
         # The rule that uses denier to deny requests to the guestbook service
         apiVersion: "config.istio.io/v1alpha2"
         kind: rule
         metadata:
-          name: deny-hello-world
-          namespace: istio-system
+          name: deny-guestbook
         spec:
-          match: destination.service=="guestbook.default.svc.cluster.local"
+          match: destination.service.name=="guestbook"
           actions:
           - handler: denyall.denier
             instances:
@@ -52,7 +49,7 @@ In this exercise we'll use the denier adapter.
 
 2. Verify that the service is denied:
 
-   In [Exercise 5](../exercise-5/README.md), we created the Ingress resource. Make sure the $INGRESS_IP environment variable is still present. Then in the terminal, try:
+   In [this exercise](../create-ingress-gateway/README.md), we created the Ingress resource. Make sure the $INGRESS_IP environment variable is still present. Then in the terminal, try:
 
     ```shell
     curl http://$INGRESS_IP/
