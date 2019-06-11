@@ -8,6 +8,25 @@ Given that individual infrastructure backends each have different interfaces and
 
 In this exercise we'll use the denier adapter.
 
+## Pre-requisites
+
+* Enabled Istio policy enforcement is required for this lab. To enable it,
+
+  ```shell
+  kubectl get configmap istio -o yaml -n istio-system | sed 's/disablePolicyChecks: true/disablePolicyChecks: false/' | kubectl -n istio-system replace -f -
+  ```
+
+* Verify that the policy enforcement is now enabled,
+
+  ```shell
+  kubectl -n istio-system get cm istio -o jsonpath="{@.data.mesh}" | grep disablePolicyChecks
+  ```
+  The command should return
+
+  ```shell
+  disablePolicyChecks: false
+  ```
+
 ## Service isolation with the denier adapter
 
 1. Block access to Guestbook service:
