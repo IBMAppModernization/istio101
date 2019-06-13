@@ -17,6 +17,7 @@ In this exercise we'll use the denier adapter.
     ```
 
     Let's examine the rule:
+
     ```yaml
         apiVersion: "config.istio.io/v1alpha2"
         kind: denier
@@ -66,11 +67,13 @@ In this exercise we'll use the denier adapter.
     ```
 
 ## Quiz
+
 1. Does creating mixer rules require app code changes? (Yes/No) No
 2. The custom code that interacts with the backend system, i.e. Prometheus, is called
 A. Rule B. Instance C. Adapter
 Answer is C
 
 ## Further reading
+
 * [Istio Mixer](https://istio.io/docs/concepts/policy-and-control/mixer.html)
 * [How to write istio mixer policies](https://medium.com/@szihai_37982/how-to-write-istio-mixer-policies-50dc639acf75)
